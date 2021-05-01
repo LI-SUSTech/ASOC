@@ -1,0 +1,425 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      coulombFriction [
+        0.5
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.059414784162242974 -0.9877040854849285 -0.14460471271481876 2.4123299103394205
+  position -2.596556173300203 1.354677992515029 -2.841351560018992
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 10 10
+}
+Robot {
+  translation 0 0.35 0
+  children [
+    DEF body Shape {
+      appearance PBRAppearance {
+        baseColor 1 0 0
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.8 0.3 0.8
+      }
+    }
+    DEF v_1 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0.4 -0.1 0
+      }
+      device [
+        DEF yaw_encoder_1 PositionSensor {
+          name "yaw_encoder_1"
+        }
+      ]
+      endPoint DEF v_1 Solid {
+        translation 0.4 -0.1 0
+        children [
+          DEF sup_v Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 1
+              roughness 1
+              metalness 0
+            }
+            geometry Box {
+              size 0.1 0.4 0.1
+            }
+          }
+        ]
+        boundingObject USE sup_v
+        physics Physics {
+          density -1
+          mass 2
+        }
+      }
+    }
+    DEF v_2 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 -0.1 0.4
+      }
+      device [
+        PositionSensor {
+          name "yaw_encoder_2"
+        }
+      ]
+      endPoint DEF v_2 Solid {
+        translation 0 -0.1 0.4
+        children [
+          USE sup_v
+        ]
+        boundingObject USE sup_v
+        physics Physics {
+          density -1
+          mass 2
+        }
+      }
+    }
+    DEF v_3 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor -0.4 -0.1 0
+      }
+      device [
+        PositionSensor {
+          name "yaw_encoder_3"
+        }
+      ]
+      endPoint DEF v_3 Solid {
+        translation -0.4 -0.1 0
+        children [
+          USE sup_v
+        ]
+        name "solid(1)"
+        boundingObject USE sup_v
+      }
+    }
+    DEF v_4 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 -0.1 -0.4
+      }
+      device [
+        PositionSensor {
+          name "yaw_encoder_4"
+        }
+      ]
+      endPoint DEF v_4 Solid {
+        translation 0 -0.1 -0.4
+        children [
+          USE sup_v
+        ]
+        name "solid(2)"
+        boundingObject USE sup_v
+        physics Physics {
+          density -1
+          mass 2
+        }
+      }
+    }
+    DEF h_1 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.5 -0.25 0
+      }
+      device [
+        PositionSensor {
+          name "roll_encoder_1"
+        }
+      ]
+      endPoint Solid {
+        translation 0.5 -0.25 0
+        rotation 1 0 0 0
+        children [
+          DEF support_h Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+              roughness 1
+              metalness 0
+            }
+            geometry Box {
+              size 0.2 0.1 0.1
+            }
+          }
+        ]
+        name "solid(3)"
+        boundingObject USE support_h
+        physics DEF support_h_physics Physics {
+          density -1
+          mass 0.5
+        }
+      }
+    }
+    DEF h_2 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0 -0.25 0.5
+      }
+      device [
+        DEF roll_encoder_2 PositionSensor {
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.25 0.5
+        rotation 0 1 0 1.5708
+        children [
+          USE support_h
+        ]
+        name "solid(4)"
+        boundingObject USE support_h
+        physics USE support_h_physics
+      }
+    }
+    DEF h_3 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.5 -0.25 0
+      }
+      device [
+        DEF roll_encoder_3 PositionSensor {
+        }
+      ]
+      endPoint Solid {
+        translation -0.5 -0.25 0
+        rotation 1 0 0 0
+        children [
+          USE support_h
+        ]
+        name "solid(5)"
+        boundingObject USE support_h
+        physics Physics {
+        }
+      }
+    }
+    DEF h_4 HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0 -0.25 -0.5
+      }
+      device [
+        DEF roll_encoder_4 PositionSensor {
+        }
+      ]
+      endPoint Solid {
+        translation 0 -0.25 -0.5
+        rotation 0 1 0 1.5708
+        children [
+          USE support_h
+        ]
+        name "solid(6)"
+        boundingObject USE support_h
+        physics USE support_h_physics
+      }
+    }
+    DEF wheel_1_l HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0.6 -0.25 -0.08
+      }
+      device [
+        RotationalMotor {
+          name "motor_1_l"
+        }
+      ]
+      endPoint Solid {
+        translation 0.6 -0.25 -0.08
+        rotation 1 0 0 1.5708
+        children [
+          DEF wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0 1 0.498039
+              roughness 1
+            }
+            geometry Cylinder {
+              height 0.05
+              radius 0.1
+            }
+          }
+        ]
+        name "solid(7)"
+        boundingObject USE wheel
+        physics DEF wheel_physics Physics {
+          density -1
+          mass 1
+          damping Damping {
+          }
+        }
+      }
+    }
+    DEF wheel_1_r HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0.6 -0.25 0.08
+      }
+      device [
+        RotationalMotor {
+          name "motor_1_r"
+        }
+      ]
+      endPoint Solid {
+        translation 0.6 -0.25 0.08
+        rotation 1 0 0 1.5708000000220124
+        children [
+          USE wheel
+        ]
+        name "solid(8)"
+        boundingObject USE wheel
+        physics USE wheel_physics
+      }
+    }
+    DEF wheel_2_l HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.08 -0.25 0.6
+      }
+      device [
+        DEF motor_2_l RotationalMotor {
+          name "motor_2_l"
+        }
+      ]
+      endPoint Solid {
+        translation 0.08 -0.25 0.6
+        rotation 0 0 -0.9999999999999999 1.5707953071795862
+        children [
+          USE wheel
+        ]
+        name "solid(9)"
+        boundingObject USE wheel
+        physics USE wheel_physics
+      }
+    }
+    DEF wheel_2_r HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.08 -0.25 0.6
+      }
+      device [
+        RotationalMotor {
+          name "motor_2_r"
+        }
+      ]
+      endPoint Solid {
+        translation -0.08 -0.25 0.6
+        rotation 0 0 1 1.5708
+        children [
+          USE wheel
+        ]
+        name "solid(10)"
+        boundingObject USE wheel
+        physics USE wheel_physics
+      }
+    }
+    DEF wheel_3_l HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor -0.6 -0.25 0.08
+      }
+      device [
+        RotationalMotor {
+          name "motor_3_l"
+        }
+      ]
+      endPoint Solid {
+        translation -0.6 -0.25 0.08
+        rotation -0.9999999999999999 0 0 1.5707953071795862
+        children [
+          USE wheel
+        ]
+        name "solid(11)"
+        boundingObject USE wheel
+        physics USE wheel_physics
+      }
+    }
+    DEF wheel_3_r HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor -0.6 -0.25 -0.08
+      }
+      device [
+        RotationalMotor {
+          name "motor_3_r"
+        }
+      ]
+      endPoint Solid {
+        translation -0.6 -0.25 -0.08
+        rotation 1 0 0 1.5708
+        children [
+          USE wheel
+        ]
+        name "solid(12)"
+        boundingObject USE wheel
+        physics USE wheel_physics
+      }
+    }
+    DEF wheel_4_l HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.08 -0.25 -0.6
+      }
+      device [
+        RotationalMotor {
+          name "motor_4_l"
+        }
+      ]
+      endPoint Solid {
+        translation -0.08 -0.25 -0.6
+        rotation 0 0 1 1.5708
+        children [
+          USE wheel
+        ]
+        name "solid(13)"
+        boundingObject USE wheel
+        physics USE wheel_physics
+      }
+    }
+    DEF wheel_4_r HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.08 -0.25 -0.6
+      }
+      device [
+        RotationalMotor {
+          name "motor_4_r"
+        }
+      ]
+      endPoint Solid {
+        translation 0.08 -0.25 -0.6
+        rotation 0.1076379275760431 -0.1076383229529541 0.9883461276187661 1.5825220422794102
+        children [
+          USE wheel
+        ]
+        name "solid(14)"
+        boundingObject USE wheel
+        physics USE wheel_physics
+      }
+    }
+    GPS {
+      children [
+        Solid {
+          translation 0 0.2 0
+          children [
+            DEF gps Shape {
+              appearance PBRAppearance {
+              }
+              geometry DEF gps Cone {
+                bottomRadius 0.05
+                height 0.1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  boundingObject USE body
+  physics Physics {
+    density -1
+    mass 4
+  }
+  controller "asoc_controller"
+}
